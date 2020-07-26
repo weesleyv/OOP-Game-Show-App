@@ -80,8 +80,10 @@ class Game {
 	gameOver(gameWon) {
 		const overlay = document.getElementById('overlay');
 		const overlayH1 = document.getElementById('game-over-message');
-	
-		overlay.style.display = 'flex';
+		const matchedLetters = document.getElementsByClassName('letter');
+		const keys = document.getElementsByClassName('key')
+
+		setTimeout(() => overlay.style.display = 'flex', 3000)
 
 		if (gameWon) {
 			overlayH1.textContent = 'You won!';
@@ -89,6 +91,13 @@ class Game {
 		} else {
 			overlayH1.textContent = 'You lose!';
 			overlay.className = 'lose';
+			for (let i = 0; i < matchedLetters.length; i++) {
+				matchedLetters[i].classList.remove('hide');
+				matchedLetters[i].classList.add('show');
+			}
+			for (let i = 0; i < keys.length; i++) {
+				keys[i].disabled = true
+			}
 		}
 	}
 
